@@ -1,6 +1,5 @@
 import pygame
-# import src.Draw
-from src.Draw import *
+from src.Coordinates import *
 
 black = (0,0,0)
 white = (255,255,255)
@@ -15,12 +14,7 @@ clock = pygame.time.Clock()
 running = True
 
 carImg = pygame.image.load('imgs/racecar.png')
-
-def car(x,y):
-    screen.blit(carImg, (x,y))
-
-x = (window_width * 0.45)
-y = (window_height * 0.8)
+coordinates = Coordinates(window_width * 0.45, window_height * 0.8)
 
 while running:
     # poll for events
@@ -28,18 +22,17 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        
+        
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(white)
 
-    car(x,y)
-
-    y -= 1
-
-    # RENDER YOUR GAME HERE
-    # draw = Draw()
-    # draw.update()
-
+    if event.type == pygame.KEYDOWN:
+        coordinates.keyUpdate(event)
+    else: 
+        coordinates.updateYup(-1)
+    screen.blit(carImg, (coordinates.get())) 
 
     # flip() the display to put your work on screen
     pygame.display.flip()
