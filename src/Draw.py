@@ -1,10 +1,10 @@
 import pygame as pg
 import numpy as np
 
-from src.swarm.Pheromone import *
 from src.swarm.Ant import *
 from src.swarm.Food import *
 
+FPS = 60
 
 class Draw:
     FLLSCRN = False
@@ -45,11 +45,11 @@ class Draw:
 
         workers = pg.sprite.Group()
         pheroLayer = APheromone(screenSize)
+        foodList = []
 
         for n in range(self.ANTS):
-            workers.add(Ant(screen, nest, pheroLayer))
+            workers.add(Ant(screen, nest, pheroLayer, foodList))
 
-        foodList = []
         foods = pg.sprite.Group()
         font = pg.font.Font(None, 30)
         clock = pg.time.Clock()

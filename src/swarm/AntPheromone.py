@@ -3,16 +3,14 @@ import numpy as np
 
 from src.AntWorld import AntWorld
 
-# from src.AntWorld import AntWorld
-
 FPS = 60
 
 
-class APheromone:
+class AntPheromone:
     pRatio = 5
 
-    def __init__(self, bigSize):
-        self.surfSize = (int(bigSize[0] / self.pRatio), int(bigSize[1] / self.pRatio))
+    def __init__(self, world: AntWorld):
+        self.surfSize = (int(world.WIDTH / self.pRatio), int(world.HEIGHT / self.pRatio))
         self.image = pg.Surface(self.surfSize).convert()
         self.img_array = np.array(pg.surfarray.array3d(self.image), dtype=float)  # .astype(np.float64)
 
